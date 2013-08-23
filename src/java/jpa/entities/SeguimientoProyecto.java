@@ -1,0 +1,367 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jpa.entities;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author Smart
+ */
+@Entity
+@Table(name = "seguimiento_proyecto")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "SeguimientoProyecto.findAll", query = "SELECT s FROM SeguimientoProyecto s"),
+    @NamedQuery(name = "SeguimientoProyecto.findByIdSeguimientoProyecto", query = "SELECT s FROM SeguimientoProyecto s WHERE s.idSeguimientoProyecto = :idSeguimientoProyecto"),
+    @NamedQuery(name = "SeguimientoProyecto.findByFechaSeguimiento", query = "SELECT s FROM SeguimientoProyecto s WHERE s.fechaSeguimiento = :fechaSeguimiento"),
+    @NamedQuery(name = "SeguimientoProyecto.findByHoraInicio", query = "SELECT s FROM SeguimientoProyecto s WHERE s.horaInicio = :horaInicio"),
+    @NamedQuery(name = "SeguimientoProyecto.findByHoraFin", query = "SELECT s FROM SeguimientoProyecto s WHERE s.horaFin = :horaFin"),
+    @NamedQuery(name = "SeguimientoProyecto.findByTotalHoras", query = "SELECT s FROM SeguimientoProyecto s WHERE s.totalHoras = :totalHoras"),
+    @NamedQuery(name = "SeguimientoProyecto.findByNomInstructor", query = "SELECT s FROM SeguimientoProyecto s WHERE s.nomInstructor = :nomInstructor"),
+    @NamedQuery(name = "SeguimientoProyecto.findByEvaluacionProyecto", query = "SELECT s FROM SeguimientoProyecto s WHERE s.evaluacionProyecto = :evaluacionProyecto")})
+public class SeguimientoProyecto implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "id_seguimiento_proyecto")
+    private String idSeguimientoProyecto;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_seguimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaSeguimiento;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "hora_inicio")
+    @Temporal(TemporalType.TIME)
+    private Date horaInicio;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "hora_fin")
+    @Temporal(TemporalType.TIME)
+    private Date horaFin;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "total_horas")
+    @Temporal(TemporalType.TIME)
+    private Date totalHoras;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "nom_instructor")
+    private String nomInstructor;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "evaluacion_proyecto")
+    private long evaluacionProyecto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSeguimientoProyecto")
+    private List<CriterioSeguimientoProyecto> criterioSeguimientoProyectoList;
+    @JoinColumn(name = "id_sede_centro", referencedColumnName = "id_sede_centro")
+    @ManyToOne(optional = false)
+    private SedeCentro idSedeCentro;
+    @JoinColumn(name = "id_proyecto_formativo", referencedColumnName = "id_proyecto_formativo")
+    @ManyToOne(optional = false)
+    private ProyectoFormativo idProyectoFormativo;
+    @JoinColumn(name = "id_estado_aspirante", referencedColumnName = "id_estado_aspirante")
+    @ManyToOne(optional = false)
+    private EstadoAspirante idEstadoAspirante;
+    @JoinColumn(name = "id_jornada_formacion", referencedColumnName = "id_jornada_formacion")
+    @ManyToOne(optional = false)
+    private JornadaFormacion idJornadaFormacion;
+    @JoinColumn(name = "id_estado_aprendiz", referencedColumnName = "id_estado_aprendiz")
+    @ManyToOne(optional = false)
+    private EstadoAprendiz idEstadoAprendiz;
+    @JoinColumn(name = "id_estado_juicio", referencedColumnName = "id_estado_juicio")
+    @ManyToOne(optional = false)
+    private EstadoJuicio idEstadoJuicio;
+    @JoinColumn(name = "id_ficha_caracterizacion", referencedColumnName = "id_ficha_caracterizacion")
+    @ManyToOne(optional = false)
+    private FichaCaracterizacion idFichaCaracterizacion;
+    @JoinColumn(name = "id_grado_juicio", referencedColumnName = "id_grado_juicio")
+    @ManyToOne(optional = false)
+    private GradoJuicio idGradoJuicio;
+    @JoinColumn(name = "id_nivel_formacion", referencedColumnName = "id_nivel_formacion")
+    @ManyToOne(optional = false)
+    private NivelFormacion idNivelFormacion;
+    @JoinColumn(name = "id_regional", referencedColumnName = "id_regional")
+    @ManyToOne(optional = false)
+    private Regional idRegional;
+    @JoinColumn(name = "id_resultado_aprendizaje", referencedColumnName = "id_resultado_aprendizaje")
+    @ManyToOne(optional = false)
+    private ResultadoAprendizaje idResultadoAprendizaje;
+    @JoinColumn(name = "id_tipo_juicio", referencedColumnName = "id_tipo_juicio")
+    @ManyToOne(optional = false)
+    private TipoJuicio idTipoJuicio;
+    @JoinColumn(name = "id_titulo_criterio", referencedColumnName = "id_titulo_criterio")
+    @ManyToOne(optional = false)
+    private TituloCriterio idTituloCriterio;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false)
+    private Usuario idUsuario;
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    @ManyToOne(optional = false)
+    private Area idArea;
+    @JoinColumn(name = "rol_id_rol", referencedColumnName = "id_rol")
+    @ManyToOne(optional = false)
+    private Rol rolIdRol;
+
+    public SeguimientoProyecto() {
+    }
+
+    public SeguimientoProyecto(String idSeguimientoProyecto) {
+        this.idSeguimientoProyecto = idSeguimientoProyecto;
+    }
+
+    public SeguimientoProyecto(String idSeguimientoProyecto, Date fechaSeguimiento, Date horaInicio, Date horaFin, Date totalHoras, String nomInstructor, long evaluacionProyecto) {
+        this.idSeguimientoProyecto = idSeguimientoProyecto;
+        this.fechaSeguimiento = fechaSeguimiento;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.totalHoras = totalHoras;
+        this.nomInstructor = nomInstructor;
+        this.evaluacionProyecto = evaluacionProyecto;
+    }
+
+    public String getIdSeguimientoProyecto() {
+        return idSeguimientoProyecto;
+    }
+
+    public void setIdSeguimientoProyecto(String idSeguimientoProyecto) {
+        this.idSeguimientoProyecto = idSeguimientoProyecto;
+    }
+
+    public Date getFechaSeguimiento() {
+        return fechaSeguimiento;
+    }
+
+    public void setFechaSeguimiento(Date fechaSeguimiento) {
+        this.fechaSeguimiento = fechaSeguimiento;
+    }
+
+    public Date getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public Date getTotalHoras() {
+        return totalHoras;
+    }
+
+    public void setTotalHoras(Date totalHoras) {
+        this.totalHoras = totalHoras;
+    }
+
+    public String getNomInstructor() {
+        return nomInstructor;
+    }
+
+    public void setNomInstructor(String nomInstructor) {
+        this.nomInstructor = nomInstructor;
+    }
+
+    public long getEvaluacionProyecto() {
+        return evaluacionProyecto;
+    }
+
+    public void setEvaluacionProyecto(long evaluacionProyecto) {
+        this.evaluacionProyecto = evaluacionProyecto;
+    }
+
+    @XmlTransient
+    public List<CriterioSeguimientoProyecto> getCriterioSeguimientoProyectoList() {
+        return criterioSeguimientoProyectoList;
+    }
+
+    public void setCriterioSeguimientoProyectoList(List<CriterioSeguimientoProyecto> criterioSeguimientoProyectoList) {
+        this.criterioSeguimientoProyectoList = criterioSeguimientoProyectoList;
+    }
+
+    public SedeCentro getIdSedeCentro() {
+        return idSedeCentro;
+    }
+
+    public void setIdSedeCentro(SedeCentro idSedeCentro) {
+        this.idSedeCentro = idSedeCentro;
+    }
+
+    public ProyectoFormativo getIdProyectoFormativo() {
+        return idProyectoFormativo;
+    }
+
+    public void setIdProyectoFormativo(ProyectoFormativo idProyectoFormativo) {
+        this.idProyectoFormativo = idProyectoFormativo;
+    }
+
+    public EstadoAspirante getIdEstadoAspirante() {
+        return idEstadoAspirante;
+    }
+
+    public void setIdEstadoAspirante(EstadoAspirante idEstadoAspirante) {
+        this.idEstadoAspirante = idEstadoAspirante;
+    }
+
+    public JornadaFormacion getIdJornadaFormacion() {
+        return idJornadaFormacion;
+    }
+
+    public void setIdJornadaFormacion(JornadaFormacion idJornadaFormacion) {
+        this.idJornadaFormacion = idJornadaFormacion;
+    }
+
+    public EstadoAprendiz getIdEstadoAprendiz() {
+        return idEstadoAprendiz;
+    }
+
+    public void setIdEstadoAprendiz(EstadoAprendiz idEstadoAprendiz) {
+        this.idEstadoAprendiz = idEstadoAprendiz;
+    }
+
+    public EstadoJuicio getIdEstadoJuicio() {
+        return idEstadoJuicio;
+    }
+
+    public void setIdEstadoJuicio(EstadoJuicio idEstadoJuicio) {
+        this.idEstadoJuicio = idEstadoJuicio;
+    }
+
+    public FichaCaracterizacion getIdFichaCaracterizacion() {
+        return idFichaCaracterizacion;
+    }
+
+    public void setIdFichaCaracterizacion(FichaCaracterizacion idFichaCaracterizacion) {
+        this.idFichaCaracterizacion = idFichaCaracterizacion;
+    }
+
+    public GradoJuicio getIdGradoJuicio() {
+        return idGradoJuicio;
+    }
+
+    public void setIdGradoJuicio(GradoJuicio idGradoJuicio) {
+        this.idGradoJuicio = idGradoJuicio;
+    }
+
+    public NivelFormacion getIdNivelFormacion() {
+        return idNivelFormacion;
+    }
+
+    public void setIdNivelFormacion(NivelFormacion idNivelFormacion) {
+        this.idNivelFormacion = idNivelFormacion;
+    }
+
+    public Regional getIdRegional() {
+        return idRegional;
+    }
+
+    public void setIdRegional(Regional idRegional) {
+        this.idRegional = idRegional;
+    }
+
+    public ResultadoAprendizaje getIdResultadoAprendizaje() {
+        return idResultadoAprendizaje;
+    }
+
+    public void setIdResultadoAprendizaje(ResultadoAprendizaje idResultadoAprendizaje) {
+        this.idResultadoAprendizaje = idResultadoAprendizaje;
+    }
+
+    public TipoJuicio getIdTipoJuicio() {
+        return idTipoJuicio;
+    }
+
+    public void setIdTipoJuicio(TipoJuicio idTipoJuicio) {
+        this.idTipoJuicio = idTipoJuicio;
+    }
+
+    public TituloCriterio getIdTituloCriterio() {
+        return idTituloCriterio;
+    }
+
+    public void setIdTituloCriterio(TituloCriterio idTituloCriterio) {
+        this.idTituloCriterio = idTituloCriterio;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Area getIdArea() {
+        return idArea;
+    }
+
+    public void setIdArea(Area idArea) {
+        this.idArea = idArea;
+    }
+
+    public Rol getRolIdRol() {
+        return rolIdRol;
+    }
+
+    public void setRolIdRol(Rol rolIdRol) {
+        this.rolIdRol = rolIdRol;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idSeguimientoProyecto != null ? idSeguimientoProyecto.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof SeguimientoProyecto)) {
+            return false;
+        }
+        SeguimientoProyecto other = (SeguimientoProyecto) object;
+        if ((this.idSeguimientoProyecto == null && other.idSeguimientoProyecto != null) || (this.idSeguimientoProyecto != null && !this.idSeguimientoProyecto.equals(other.idSeguimientoProyecto))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "jpa.entities.SeguimientoProyecto[ idSeguimientoProyecto=" + idSeguimientoProyecto + " ]";
+    }
+    
+}

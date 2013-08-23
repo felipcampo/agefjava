@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:growl id="msgs" showDetail="false" sticky="false"/>     
+        <h:form id="formConcertacionPlanTrabajoProductiva">
+            <div id="form" align="center">
+                <p:panelGrid>             
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_codCpt}" for="codCpt" />
+                        </p:column>
+                        <p:column>    
+                            <p:inputText id="codCpt" value="#{concertacionPlanTrabajoProductivaController.selected.codCpt}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_codCpt}" required="true" requiredMessage="#{bundle.CreateConcertacionPlanTrabajoProductivaRequiredMessage_codCpt}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_actDes}" for="actDes" />
+                        </p:column>
+                        <p:column>    
+                            <p:inputTextarea rows="4" cols="30" id="actDes" value="#{concertacionPlanTrabajoProductivaController.selected.actDes}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_actDes}" required="true" requiredMessage="#{bundle.CreateConcertacionPlanTrabajoProductivaRequiredMessage_actDes}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_eviApr}" for="eviApr" />
+                        </p:column>
+                        <p:column>    
+                            <p:inputTextarea rows="4" cols="30" id="eviApr" value="#{concertacionPlanTrabajoProductivaController.selected.eviApr}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_eviApr}" required="true" requiredMessage="#{bundle.CreateConcertacionPlanTrabajoProductivaRequiredMessage_eviApr}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_fecCpt}" for="fecCpt" />
+                        </p:column>
+                        <p:column>    
+                            <p:calendar navigator="true" pattern="MM/dd/yyyy" showOn="button" id="fecCpt" value="#{concertacionPlanTrabajoProductivaController.selected.fecCpt}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_fecCpt}" required="true" requiredMessage="#{bundle.CreateConcertacionPlanTrabajoProductivaRequiredMessage_fecCpt}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_lugCpt}" for="lugCpt" />
+                        </p:column>
+                        <p:column>    
+                            <p:inputText id="lugCpt" value="#{concertacionPlanTrabajoProductivaController.selected.lugCpt}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_lugCpt}" required="true" requiredMessage="#{bundle.CreateConcertacionPlanTrabajoProductivaRequiredMessage_lugCpt}"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="#{bundle.CreateConcertacionPlanTrabajoProductivaLabel_obsCpt}" for="obsCpt" />
+                        </p:column>
+                        <p:column>    
+                            <p:inputTextarea rows="4" cols="30" id="obsCpt" value="#{concertacionPlanTrabajoProductivaController.selected.obsCpt}" title="#{bundle.CreateConcertacionPlanTrabajoProductivaTitle_obsCpt}"/>
+                        </p:column>                       
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:fileUpload fileUploadListener="#{concertacionPlanTrabajoProductivaController.selected.eviApr}" mode="advanced" dragDropSupport="false"  
+                                          multiple="true" sizeLimit="100000000" allowTypes="/(\.|\/)(gif|jpe?g|png|bmp|avi|pdf)$/" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <br />
+
+
+
+
+                <br />
+                <p:commandButton process="@this, @form" update="@form, :msgs"
+                                 action="#{concertacionPlanTrabajoProductivaController.create}" value="#{bundle.CreateConcertacionPlanTrabajoProductivaSaveLink}" icon="ui-icon-disk"/>
+                <br />
+                <br />
+            </div>
+        </h:form>       
+    </ui:composition>
+
+</html>
