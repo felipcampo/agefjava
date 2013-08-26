@@ -56,7 +56,9 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idGuiaAprendizaje}" for="idGuiaAprendizaje" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:inputText id="idGuiaAprendizaje" value="#{alistamientoController.selected.idGuiaAprendizaje}" title="#{bundle.EditAlistamientoTitle_idGuiaAprendizaje}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idGuiaAprendizaje}"/>
+                                <p:selectOneMenu id="idGuiaAprendizaje" value="#{alistamientoController.selected.idGuiaAprendizaje}" >
+                                    <f:selectItems value="#{guiaAprendizajeController.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
                             </p:column>
                             <p:column style="border-left: white;">
                                 <p:message for="idGuiaAprendizaje"/>
@@ -67,7 +69,7 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idEvaluacionSeguimiento}" for="idEvaluacionSeguimiento" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:selectOneMenu id="idEvaluacionSeguimiento" value="#{alistamientoController.selected.idEvaluacionSeguimiento}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idEvaluacionSeguimiento}">
+                                <p:selectOneMenu id="idEvaluacionSeguimiento" value="#{alistamientoController.selected.idEvaluacionSeguimiento}" >
                                     <f:selectItems value="#{evaluacionSeguimientoController.itemsAvailableSelectOne}"/>
                                 </p:selectOneMenu>
                             </p:column>
@@ -80,7 +82,7 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idPlaneacionPedagogica}" for="idPlaneacionPedagogica" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:selectOneMenu id="idPlaneacionPedagogica" value="#{alistamientoController.selected.idPlaneacionPedagogica}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idPlaneacionPedagogica}">
+                                <p:selectOneMenu id="idPlaneacionPedagogica" value="#{alistamientoController.selected.idPlaneacionPedagogica}" >
                                     <f:selectItems value="#{planeacionPedagogicaController.itemsAvailableSelectOne}"/>
                                 </p:selectOneMenu>
                             </p:column>
@@ -93,7 +95,7 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idProgramacionProyecto}" for="idProgramacionProyecto" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:selectOneMenu id="idProgramacionProyecto" value="#{alistamientoController.selected.idProgramacionProyecto}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idProgramacionProyecto}">
+                                <p:selectOneMenu id="idProgramacionProyecto" value="#{alistamientoController.selected.idProgramacionProyecto}" >
                                     <f:selectItems value="#{programacionProyectoController.itemsAvailableSelectOne}"/>
                                 </p:selectOneMenu>
                             </p:column>
@@ -106,7 +108,7 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idVerificacionAmbienteTitulado}" for="idVerificacionAmbienteTitulado" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:selectOneMenu id="idVerificacionAmbienteTitulado" value="#{alistamientoController.selected.idVerificacionAmbienteTitulado}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idVerificacionAmbienteTitulado}">
+                                <p:selectOneMenu id="idVerificacionAmbienteTitulado" value="#{alistamientoController.selected.idVerificacionAmbienteTitulado}" >
                                     <f:selectItems value="#{verificacionAmbienteTituladoController.itemsAvailableSelectOne}"/>
                                 </p:selectOneMenu>
                             </p:column>
@@ -145,7 +147,7 @@
                                 <h:outputLabel value="#{bundle.EditAlistamientoLabel_idProyectoFormativo}" for="idProyectoFormativo" />
                             </p:column>
                             <p:column style="border-right: white"> 
-                                <p:selectOneMenu id="idProyectoFormativo" value="#{alistamientoController.selected.idProyectoFormativo}" required="true" requiredMessage="#{bundle.EditAlistamientoRequiredMessage_idProyectoFormativo}">
+                                <p:selectOneMenu id="idProyectoFormativo" value="#{alistamientoController.selected.idProyectoFormativo}" >
                                     <f:selectItems value="#{proyectoFormativoController.itemsAvailableSelectOne}"/>
                                 </p:selectOneMenu>
                             </p:column>

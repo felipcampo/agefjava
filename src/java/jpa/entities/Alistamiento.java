@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Smart
+ * @author ADSI
  */
 @Entity
 @Table(name = "alistamiento")
@@ -38,8 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Alistamiento.findAll", query = "SELECT a FROM Alistamiento a"),
     @NamedQuery(name = "Alistamiento.findByIdAlistamiento", query = "SELECT a FROM Alistamiento a WHERE a.idAlistamiento = :idAlistamiento"),
     @NamedQuery(name = "Alistamiento.findByTerminal", query = "SELECT a FROM Alistamiento a WHERE a.terminal = :terminal"),
-    @NamedQuery(name = "Alistamiento.findByFechaAlistamiento", query = "SELECT a FROM Alistamiento a WHERE a.fechaAlistamiento = :fechaAlistamiento"),
-    @NamedQuery(name = "Alistamiento.findByIdGuiaAprendizaje", query = "SELECT a FROM Alistamiento a WHERE a.idGuiaAprendizaje = :idGuiaAprendizaje")})
+    @NamedQuery(name = "Alistamiento.findByFechaAlistamiento", query = "SELECT a FROM Alistamiento a WHERE a.fechaAlistamiento = :fechaAlistamiento")})
 public class Alistamiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,26 +52,25 @@ public class Alistamiento implements Serializable {
     @Column(name = "fecha_alistamiento")
     @Temporal(TemporalType.DATE)
     private Date fechaAlistamiento;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_guia_aprendizaje")
-    private int idGuiaAprendizaje;
     @JoinTable(name = "alistamiento_guia_aprendizaje", joinColumns = {
         @JoinColumn(name = "id_alistamiento", referencedColumnName = "id_alistamiento")}, inverseJoinColumns = {
         @JoinColumn(name = "id_guia_aprendizaje", referencedColumnName = "id_guia_aprendizaje")})
     @ManyToMany
     private List<GuiaAprendizaje> guiaAprendizajeList;
+    @JoinColumn(name = "id_guia_aprendizaje", referencedColumnName = "id_guia_aprendizaje")
+    @ManyToOne
+    private GuiaAprendizaje idGuiaAprendizaje;
     @JoinColumn(name = "id_evaluacion_seguimiento", referencedColumnName = "id_evaluacion_seguimiento")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private EvaluacionSeguimiento idEvaluacionSeguimiento;
     @JoinColumn(name = "id_planeacion_pedagogica", referencedColumnName = "id_planeacion_pedagogica")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private PlaneacionPedagogica idPlaneacionPedagogica;
     @JoinColumn(name = "id_programacion_proyecto", referencedColumnName = "id_programacion_proyecto")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private ProgramacionProyecto idProgramacionProyecto;
     @JoinColumn(name = "id_verificacion_ambiente_titulado", referencedColumnName = "id_verificacion_ambiente_titulado")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private VerificacionAmbienteTitulado idVerificacionAmbienteTitulado;
     @JoinColumn(name = "id_ficha_caracterizacion", referencedColumnName = "id_ficha_caracterizacion")
     @ManyToOne(optional = false)
@@ -81,7 +79,7 @@ public class Alistamiento implements Serializable {
     @ManyToOne(optional = false)
     private ActividadProyecto idActividadProyecto;
     @JoinColumn(name = "id_proyecto_formativo", referencedColumnName = "id_proyecto_formativo")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private ProyectoFormativo idProyectoFormativo;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
@@ -97,11 +95,6 @@ public class Alistamiento implements Serializable {
 
     public Alistamiento(String idAlistamiento) {
         this.idAlistamiento = idAlistamiento;
-    }
-
-    public Alistamiento(String idAlistamiento, int idGuiaAprendizaje) {
-        this.idAlistamiento = idAlistamiento;
-        this.idGuiaAprendizaje = idGuiaAprendizaje;
     }
 
     public String getIdAlistamiento() {
@@ -128,14 +121,6 @@ public class Alistamiento implements Serializable {
         this.fechaAlistamiento = fechaAlistamiento;
     }
 
-    public int getIdGuiaAprendizaje() {
-        return idGuiaAprendizaje;
-    }
-
-    public void setIdGuiaAprendizaje(int idGuiaAprendizaje) {
-        this.idGuiaAprendizaje = idGuiaAprendizaje;
-    }
-
     @XmlTransient
     public List<GuiaAprendizaje> getGuiaAprendizajeList() {
         return guiaAprendizajeList;
@@ -143,6 +128,14 @@ public class Alistamiento implements Serializable {
 
     public void setGuiaAprendizajeList(List<GuiaAprendizaje> guiaAprendizajeList) {
         this.guiaAprendizajeList = guiaAprendizajeList;
+    }
+
+    public GuiaAprendizaje getIdGuiaAprendizaje() {
+        return idGuiaAprendizaje;
+    }
+
+    public void setIdGuiaAprendizaje(GuiaAprendizaje idGuiaAprendizaje) {
+        this.idGuiaAprendizaje = idGuiaAprendizaje;
     }
 
     public EvaluacionSeguimiento getIdEvaluacionSeguimiento() {

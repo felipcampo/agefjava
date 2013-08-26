@@ -40,6 +40,10 @@
                         <h:outputText value="#{seguimientoProyectoController.selected.nomInstructor}" title="#{bundle.ViewSeguimientoProyectoTitle_nomInstructor}"/>
                         <h:outputText value="#{bundle.ViewSeguimientoProyectoLabel_evaluacionProyecto}"/>
                         <h:outputText value="#{seguimientoProyectoController.selected.evaluacionProyecto}" title="#{bundle.ViewSeguimientoProyectoTitle_evaluacionProyecto}"/>
+                        <h:outputText value="#{bundle.ViewSeguimientoProyectoLabel_fechaProgramacionSeguimiento}"/>
+                        <h:outputText value="#{seguimientoProyectoController.selected.fechaProgramacionSeguimiento}" title="#{bundle.ViewSeguimientoProyectoTitle_fechaProgramacionSeguimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewSeguimientoProyectoLabel_idSedeCentro}"/>
                         <h:outputText value="#{seguimientoProyectoController.selected.idSedeCentro}" title="#{bundle.ViewSeguimientoProyectoTitle_idSedeCentro}"/>
                         <h:outputText value="#{bundle.ViewSeguimientoProyectoLabel_idProyectoFormativo}"/>

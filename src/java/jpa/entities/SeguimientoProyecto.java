@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Smart
+ * @author ADSI
  */
 @Entity
 @Table(name = "seguimiento_proyecto")
@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SeguimientoProyecto.findByHoraFin", query = "SELECT s FROM SeguimientoProyecto s WHERE s.horaFin = :horaFin"),
     @NamedQuery(name = "SeguimientoProyecto.findByTotalHoras", query = "SELECT s FROM SeguimientoProyecto s WHERE s.totalHoras = :totalHoras"),
     @NamedQuery(name = "SeguimientoProyecto.findByNomInstructor", query = "SELECT s FROM SeguimientoProyecto s WHERE s.nomInstructor = :nomInstructor"),
-    @NamedQuery(name = "SeguimientoProyecto.findByEvaluacionProyecto", query = "SELECT s FROM SeguimientoProyecto s WHERE s.evaluacionProyecto = :evaluacionProyecto")})
+    @NamedQuery(name = "SeguimientoProyecto.findByEvaluacionProyecto", query = "SELECT s FROM SeguimientoProyecto s WHERE s.evaluacionProyecto = :evaluacionProyecto"),
+    @NamedQuery(name = "SeguimientoProyecto.findByFechaProgramacionSeguimiento", query = "SELECT s FROM SeguimientoProyecto s WHERE s.fechaProgramacionSeguimiento = :fechaProgramacionSeguimiento")})
 public class SeguimientoProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,84 +50,75 @@ public class SeguimientoProyecto implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "id_seguimiento_proyecto")
     private String idSeguimientoProyecto;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_seguimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaSeguimiento;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "hora_inicio")
     @Temporal(TemporalType.TIME)
     private Date horaInicio;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "hora_fin")
     @Temporal(TemporalType.TIME)
     private Date horaFin;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "total_horas")
     @Temporal(TemporalType.TIME)
     private Date totalHoras;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "nom_instructor")
     private String nomInstructor;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "evaluacion_proyecto")
-    private long evaluacionProyecto;
+    private Long evaluacionProyecto;
+    @Column(name = "fecha_programacion_seguimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaProgramacionSeguimiento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSeguimientoProyecto")
     private List<CriterioSeguimientoProyecto> criterioSeguimientoProyectoList;
     @JoinColumn(name = "id_sede_centro", referencedColumnName = "id_sede_centro")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private SedeCentro idSedeCentro;
     @JoinColumn(name = "id_proyecto_formativo", referencedColumnName = "id_proyecto_formativo")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private ProyectoFormativo idProyectoFormativo;
     @JoinColumn(name = "id_estado_aspirante", referencedColumnName = "id_estado_aspirante")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private EstadoAspirante idEstadoAspirante;
     @JoinColumn(name = "id_jornada_formacion", referencedColumnName = "id_jornada_formacion")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private JornadaFormacion idJornadaFormacion;
     @JoinColumn(name = "id_estado_aprendiz", referencedColumnName = "id_estado_aprendiz")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private EstadoAprendiz idEstadoAprendiz;
     @JoinColumn(name = "id_estado_juicio", referencedColumnName = "id_estado_juicio")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private EstadoJuicio idEstadoJuicio;
     @JoinColumn(name = "id_ficha_caracterizacion", referencedColumnName = "id_ficha_caracterizacion")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private FichaCaracterizacion idFichaCaracterizacion;
     @JoinColumn(name = "id_grado_juicio", referencedColumnName = "id_grado_juicio")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private GradoJuicio idGradoJuicio;
     @JoinColumn(name = "id_nivel_formacion", referencedColumnName = "id_nivel_formacion")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private NivelFormacion idNivelFormacion;
     @JoinColumn(name = "id_regional", referencedColumnName = "id_regional")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Regional idRegional;
     @JoinColumn(name = "id_resultado_aprendizaje", referencedColumnName = "id_resultado_aprendizaje")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private ResultadoAprendizaje idResultadoAprendizaje;
     @JoinColumn(name = "id_tipo_juicio", referencedColumnName = "id_tipo_juicio")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TipoJuicio idTipoJuicio;
     @JoinColumn(name = "id_titulo_criterio", referencedColumnName = "id_titulo_criterio")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TituloCriterio idTituloCriterio;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Usuario idUsuario;
     @JoinColumn(name = "id_area", referencedColumnName = "id_area")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Area idArea;
     @JoinColumn(name = "rol_id_rol", referencedColumnName = "id_rol")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Rol rolIdRol;
 
     public SeguimientoProyecto() {
@@ -134,16 +126,6 @@ public class SeguimientoProyecto implements Serializable {
 
     public SeguimientoProyecto(String idSeguimientoProyecto) {
         this.idSeguimientoProyecto = idSeguimientoProyecto;
-    }
-
-    public SeguimientoProyecto(String idSeguimientoProyecto, Date fechaSeguimiento, Date horaInicio, Date horaFin, Date totalHoras, String nomInstructor, long evaluacionProyecto) {
-        this.idSeguimientoProyecto = idSeguimientoProyecto;
-        this.fechaSeguimiento = fechaSeguimiento;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.totalHoras = totalHoras;
-        this.nomInstructor = nomInstructor;
-        this.evaluacionProyecto = evaluacionProyecto;
     }
 
     public String getIdSeguimientoProyecto() {
@@ -194,12 +176,20 @@ public class SeguimientoProyecto implements Serializable {
         this.nomInstructor = nomInstructor;
     }
 
-    public long getEvaluacionProyecto() {
+    public Long getEvaluacionProyecto() {
         return evaluacionProyecto;
     }
 
-    public void setEvaluacionProyecto(long evaluacionProyecto) {
+    public void setEvaluacionProyecto(Long evaluacionProyecto) {
         this.evaluacionProyecto = evaluacionProyecto;
+    }
+
+    public Date getFechaProgramacionSeguimiento() {
+        return fechaProgramacionSeguimiento;
+    }
+
+    public void setFechaProgramacionSeguimiento(Date fechaProgramacionSeguimiento) {
+        this.fechaProgramacionSeguimiento = fechaProgramacionSeguimiento;
     }
 
     @XmlTransient

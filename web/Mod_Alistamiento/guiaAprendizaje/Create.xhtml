@@ -108,6 +108,19 @@
                         </p:row>
                         <p:row>
                             <p:column>
+                                <h:outputLabel value="#{bundle.CreateGuiaAprendizajeLabel_idProyectoFormativo}" for="idProyectoFormativo" />
+                            </p:column>
+                            <p:column style="border-right: white">    
+                                <p:selectOneMenu id="idProyectoFormativo" value="#{guiaAprendizajeController.selected.idProyectoFormativo}" required="true" requiredMessage="#{bundle.CreateGuiaAprendizajeRequiredMessage_idProyectoFormativo}">
+                                    <f:selectItems value="#{proyectoFormativoController.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column style="border-left: white;">
+                                <p:message for="idProyectoFormativo"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
                                 <h:outputLabel value="#{bundle.CreateGuiaAprendizajeLabel_idAmbiente}" for="idAmbiente" />
                             </p:column>
                             <p:column style="border-right: white">    

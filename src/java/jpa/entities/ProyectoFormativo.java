@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Smart
+ * @author ADSI
  */
 @Entity
 @Table(name = "proyecto_formativo")
@@ -219,10 +219,12 @@ public class ProyectoFormativo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
     private List<PlaneacionPedagogica> planeacionPedagogicaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
+    private List<GuiaAprendizaje> guiaAprendizajeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
     private List<VerificacionAmbienteTitulado> verificacionAmbienteTituladoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
     private List<PraxisPedagogica> praxisPedagogicaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
+    @OneToMany(mappedBy = "idProyectoFormativo")
     private List<Alistamiento> alistamientoList;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
@@ -242,7 +244,7 @@ public class ProyectoFormativo implements Serializable {
     @JoinColumn(name = "id_estado_proyecto", referencedColumnName = "id_estado_proyecto")
     @ManyToOne(optional = false)
     private EstadoProyecto idEstadoProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProyectoFormativo")
+    @OneToMany(mappedBy = "idProyectoFormativo")
     private List<SeguimientoProyecto> seguimientoProyectoList;
 
     public ProyectoFormativo() {
@@ -559,6 +561,15 @@ public class ProyectoFormativo implements Serializable {
 
     public void setPlaneacionPedagogicaList(List<PlaneacionPedagogica> planeacionPedagogicaList) {
         this.planeacionPedagogicaList = planeacionPedagogicaList;
+    }
+
+    @XmlTransient
+    public List<GuiaAprendizaje> getGuiaAprendizajeList() {
+        return guiaAprendizajeList;
+    }
+
+    public void setGuiaAprendizajeList(List<GuiaAprendizaje> guiaAprendizajeList) {
+        this.guiaAprendizajeList = guiaAprendizajeList;
     }
 
     @XmlTransient

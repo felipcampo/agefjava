@@ -70,6 +70,13 @@
                                       sortBy="#{item.evaluacionProyecto}">                        
                                 <h:outputText value="#{item.evaluacionProyecto}"/>
                             </p:column>
+                            <p:column headerText="#{bundle.ListSeguimientoProyectoTitle_fechaProgramacionSeguimiento}"
+                                      filterBy="#{item.fechaProgramacionSeguimiento}"
+                                      sortBy="#{item.fechaProgramacionSeguimiento}">                        
+                                <h:outputText value="#{item.fechaProgramacionSeguimiento}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
                             <p:column headerText="#{bundle.ListSeguimientoProyectoTitle_idSedeCentro}"
                                       filterBy="#{item.idSedeCentro}"
                                       sortBy="#{item.idSedeCentro}">                        

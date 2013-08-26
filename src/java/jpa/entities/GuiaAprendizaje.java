@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Smart
+ * @author ADSI
  */
 @Entity
 @Table(name = "guia_aprendizaje")
@@ -85,6 +86,9 @@ public class GuiaAprendizaje implements Serializable {
     private String glosario;
     @ManyToMany(mappedBy = "guiaAprendizajeList")
     private List<Alistamiento> alistamientoList;
+    @JoinColumn(name = "id_proyecto_formativo", referencedColumnName = "id_proyecto_formativo")
+    @ManyToOne(optional = false)
+    private ProyectoFormativo idProyectoFormativo;
     @JoinColumn(name = "id_ambiente", referencedColumnName = "id_ambiente")
     @ManyToOne(optional = false)
     private Ambiente idAmbiente;
@@ -97,6 +101,8 @@ public class GuiaAprendizaje implements Serializable {
     @JoinColumn(name = "id_ficha_caracterizacion", referencedColumnName = "id_ficha_caracterizacion")
     @ManyToOne(optional = false)
     private FichaCaracterizacion idFichaCaracterizacion;
+    @OneToMany(mappedBy = "idGuiaAprendizaje")
+    private List<Alistamiento> alistamientoList1;
 
     public GuiaAprendizaje() {
     }
@@ -189,6 +195,14 @@ public class GuiaAprendizaje implements Serializable {
         this.alistamientoList = alistamientoList;
     }
 
+    public ProyectoFormativo getIdProyectoFormativo() {
+        return idProyectoFormativo;
+    }
+
+    public void setIdProyectoFormativo(ProyectoFormativo idProyectoFormativo) {
+        this.idProyectoFormativo = idProyectoFormativo;
+    }
+
     public Ambiente getIdAmbiente() {
         return idAmbiente;
     }
@@ -219,6 +233,15 @@ public class GuiaAprendizaje implements Serializable {
 
     public void setIdFichaCaracterizacion(FichaCaracterizacion idFichaCaracterizacion) {
         this.idFichaCaracterizacion = idFichaCaracterizacion;
+    }
+
+    @XmlTransient
+    public List<Alistamiento> getAlistamientoList1() {
+        return alistamientoList1;
+    }
+
+    public void setAlistamientoList1(List<Alistamiento> alistamientoList1) {
+        this.alistamientoList1 = alistamientoList1;
     }
 
     @Override
