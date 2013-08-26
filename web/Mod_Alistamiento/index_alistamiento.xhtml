@@ -16,6 +16,9 @@ and open the template in the editor.
         <ui:define name="title">
             <h:outputText value="Alistamiento"></h:outputText>
         </ui:define>
+         <ui:define name="menumodulo">
+            <ui:include src="Menu_gestorpedagogo.xhtml"/>
+        </ui:define>
         <ui:define name="body">
              <div id="Layoutcontenido">
              <div id="Layouttitulo">
@@ -69,7 +72,7 @@ and open the template in the editor.
 </p:accordionPanel> 
   <!--****************imagen animada****************-->
    </div>
-                 <div id="Layoutimagen"><img id="img_alistamiento" src="../Alistamientos/imagenes/gif.gif" alt="img_alistamiento" /></div>
+                 <div id="Layoutimagen"><img id="img_alistamiento" src="../Mod_Alistamiento/imagenes/gif.gif" alt="img_alistamiento" /></div>
              </div>
             
         </ui:define>
